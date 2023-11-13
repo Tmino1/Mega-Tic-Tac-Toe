@@ -3,59 +3,73 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-function Tile({ value }){
+function Tile({ value, onSquareClick }){
+  
   return (
-    <button className='tile'>{value}</button>
+    <button 
+    className='tile' onClick={onSquareClick}
+    >
+      {value}
+    </button>
   )
 }
 
 function MediumBoard({id}){
+  const [squares, setSquares] = useState(Array(91).fill(null));
+  function handleClick(i) {
+    const nextSquares = squares.slice();
+    nextSquares[i] = i;
+    setSquares(nextSquares);
+  }
+  
   return (
     <>
+    <div className='med-board'>
     <div className='med-row'>
-      <Tile value='0' />
-      <Tile value='1' />
-      <Tile value='2' />
+      <Tile value={squares[1 + 9*id]} onSquareClick={() => handleClick(1 + 9*id)}/>
+      <Tile value={squares[2 + 9*id]} onSquareClick={() => handleClick(2 + 9*id)}/>
+      <Tile value={squares[3 + 9*id]} onSquareClick={() => handleClick(3 + 9*id)}/>
     </div>
     <div className='med-row'>
-      <Tile value='3' />
-      <Tile value='4' />
-      <Tile value='5' />
+      <Tile value={squares[4 + 9*id]} onSquareClick={() => handleClick(4 + 9*id)}/>
+      <Tile value={squares[5 + 9*id]} onSquareClick={() => handleClick(5 + 9*id)}/>
+      <Tile value={squares[6 + 9*id]} onSquareClick={() => handleClick(6 + 9*id)}/>
     </div>
     <div className='med-row'>
-      <Tile value='6' />
-      <Tile value='7' />
-      <Tile value='8' />
-      
+      <Tile value={squares[7 + 9*id]} onSquareClick={() => handleClick(7 + 9*id)}/>
+      <Tile value={squares[8 + 9*id]} onSquareClick={() => handleClick(8 + 9*id)}/>
+      <Tile value={squares[9 + 9*id]} onSquareClick={() => handleClick(9 + 9*id)}/>
+    </div>
     </div>
     </>
   )
 }
 
 function BigBoard(){
+  
   return ( 
     <>
     <div className='board'>
+    
     <div>
       <h2>Mega Tic-Tac-Toe</h2>
     </div>
 
     <div className='big-row'>
-        <MediumBoard id='9'/>
-        <MediumBoard id='9*2'/>
-        <MediumBoard id='9*3'/>
+        <MediumBoard id={1}/>
+        <MediumBoard id={2}/>
+        <MediumBoard id={3}/>
         
     </div>
-
     <div className='big-row'>
-        <MediumBoard id='9*4' />
-        <MediumBoard id='9*5'/>
-        <MediumBoard id='9*6'/>
+        <MediumBoard id={4} />
+        <MediumBoard id={5}/>
+        <MediumBoard id={6}/>
     </div>
     <div className='big-row'>
-        <MediumBoard id='9*7'/>
-        <MediumBoard id='9*8'/>
-        <MediumBoard id='9*9'/>
+        <MediumBoard id={7}/>
+        <MediumBoard id={8}/>
+        <MediumBoard id={9}/>
     </div>
     </div>
     </>
